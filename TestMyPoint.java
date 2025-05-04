@@ -1,35 +1,42 @@
 // TestMyPoint.java
 public class TestMyPoint {
     public static void main(String[] args) {
-        MyPoint p1 = new MyPoint();  // Test constructor
-        System.out.println(p1.toString());      // Test toString()
+        // Test konstruktorja
+        MyPoint p1 = new MyPoint();
+        // Test izpisa
+        System.out.println(p1.toString());
 
-        p1.setX(8);   // Test setters
+        // Test setter metod
+        p1.setX(8);
         p1.setY(6);
-        System.out.println("x is: " + p1.getX());  // Test getters
+
+        // Test getter metod
+        System.out.println("x is: " + p1.getX());
         System.out.println("y is: " + p1.getY());
 
-        p1.setXY(3, 0);   // Test setXY()
-        System.out.println(p1.getXY()[0]);  // Test getXY()
+        // Test ostalih setter in getter metod
+        p1.setXY(3, 0);   // setter
+        System.out.println(p1.getXY()[0]);  // getter
         System.out.println(p1.getXY()[1]);
-        System.out.println(p1);
+        System.out.println(p1); // izpis
 
-        MyPoint p2 = new MyPoint(0, 4);  // Test another constructor
-        System.out.println(p2);
+        // Test drugega konstruktorja
+        MyPoint p2 = new MyPoint(0, 4);
+        System.out.println(p2); // izpis
 
-        // Testing the overloaded methods distance()
-        System.out.println(p1.distance(p2));    // distance(MyPoint)
-        System.out.println(p2.distance(p1));    // distance(MyPoint)
-        System.out.println(p1.distance(5, 6));  // distance(int, int)
-        System.out.println(p1.distance());      // distance() to origin
+        // Test metod distance
+        System.out.println(p1.distance(p2));    // distance(MyPoint)     1 -> 2
+        System.out.println(p2.distance(p1));    // distance(MyPoint)     2 -> 1
+        System.out.println(p1.distance(5, 6));  // distance(int, int)    1 -> tocke
+        System.out.println(p1.distance());      // distance()            1 -> izhodisca
 
-        // Allocating 10 points in an array
+        // Kreiranje tabele 10x MyPoint
         MyPoint[] points = new MyPoint[10];
         for (int i = 0; i < points.length; i++) {
             points[i] = new MyPoint(i + 1, i + 1);
         }
 
-        // Print all the points
+        // Izpis vseh tock iz tabele z for each loopom
         for (MyPoint point : points) {
             System.out.println(point);
         }
@@ -41,67 +48,64 @@ class MyPoint {
     private int x;
     private int y;
 
-    // No-arg constructor
+    // Konstruktor #1 (brez parametrov)
     public MyPoint() {
         this.x = 0;
         this.y = 0;
     }
 
-    // Constructor with parameters
+    // Konstruktor #2 (s parametri)
     public MyPoint(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    // Getter and Setter for x
+    // Getterji in setterji
     public int getX() {
         return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setXY(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public void setX(int x) {
         this.x = x;
     }
 
-    // Getter and Setter for y
-    public int getY() {
-        return y;
-    }
-
     public void setY(int y) {
         this.y = y;
     }
 
-    // Set both x and y
-    public void setXY(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    // Get both x and y
     public int[] getXY() {
         return new int[]{x, y};
     }
 
-    // toString
+    // Override metode toString() za izpis
     @Override
     public String toString() {
         return "(" + x + ", " + y + ")";
     }
 
-    // distance to given x, y
+    // Dolzina od objekta do dolocene tocke
     public double distance(int x, int y) {
-        int xDiff = this.x - x;
-        int yDiff = this.y - y;
-        return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+        int dx = this.x - x;
+        int dy = this.y - y;
+        return Math.sqrt(dx * dx + dy * dy);
     }
 
-    // distance to another MyPoint
+    // Dolzina od objekta do drugega objekta
     public double distance(MyPoint another) {
-        return distance(another.x, another.y);
+        return distance(another.x, another.y); // klic metode distance(int x, int y) znotraj objekta
     }
 
-    // distance to origin
+    // Dolzina od objekta do koordinatnega izhodisca (0, 0)
     public double distance() {
-        return distance(0, 0);
+        return distance(0, 0); // klic metode distance(int x, int y) znotraj objekta
     }
 }
