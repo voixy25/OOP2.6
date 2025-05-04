@@ -11,8 +11,8 @@ public class TestMyPoint {
         p1.setY(6);
 
         // Test getter metod
-        System.out.println("x is: " + p1.getX());
-        System.out.println("y is: " + p1.getY());
+        System.out.println("x je: " + p1.getX());
+        System.out.println("y je: " + p1.getY());
 
         // Test ostalih setter in getter metod
         p1.setXY(3, 0);   // setter
